@@ -10,6 +10,8 @@ import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
+import org.eclipse.jdt.core.dom.Modifier;
+
 /**
  * Hello world!
  */
@@ -21,7 +23,7 @@ public class App {
         @SuppressWarnings("deprecation")
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(
-        		"public class A { int i = 9;  \n int j; \n ArrayList<Integer> al = new ArrayList<Integer>();j=1000; }".toCharArray());
+        		"public class A { int i = 9;  \n public int j; \n private ArrayList<Integer> al = new ArrayList<Integer>();j=1000; }".toCharArray());
         
         final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
         
@@ -51,6 +53,25 @@ public class App {
 		            for (FieldDeclaration field : node.getFields()) {
 		                System.out.println("Field: " + field);
 //		                System.out.println(field.);
+		                for (Object fragment : field.fragments()) {
+		                    VariableDeclarationFragment variable = (VariableDeclarationFragment) fragment;
+		                    System.out.println("Field Name: " + variable.getName());
+		                    System.out.println("Field Type: " + field.getType());
+		                    
+		                 // Récupérer les modificateurs
+		                    int modifiers = field.getModifiers();
+
+		                    // Vérifier si le champ est public, private, protected, ou autre
+		                    if (Modifier.isPublic(modifiers)) {
+		                        System.out.println("Field is public");
+		                    } else if (Modifier.isPrivate(modifiers)) {
+		                        System.out.println("Field is private");
+		                    } else if (Modifier.isProtected(modifiers)) {
+		                        System.out.println("Field is protected");
+		                    } else {
+		                        System.out.println("Field has package-private access (no explicit modifier)");
+		                    }
+		                }
 		            }
 		        }
 		        return super.visit(node);
