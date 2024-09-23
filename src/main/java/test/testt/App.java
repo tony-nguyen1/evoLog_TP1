@@ -7,9 +7,13 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
+import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
+
+import visitor.ASTVisitorClassName;
+
 import org.eclipse.jdt.core.dom.Modifier;
 
 /**
@@ -23,7 +27,7 @@ public class App {
         @SuppressWarnings("deprecation")
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(
-        		"public class A { int i = 9;  \n public int j; \n private ArrayList<Integer> al = new ArrayList<Integer>();j=1000; }".toCharArray());
+        		"public class A { int i = 9;  \n public int j; \n private ArrayList<Integer> al = new ArrayList<Integer>();j=1000; private boolean isBool(boolean b) { return b; }".toCharArray());
         
         final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
         
@@ -76,8 +80,24 @@ public class App {
 		        }
 		        return super.visit(node);
 		    }
+			
+			@Override
+			public boolean visit(MethodDeclaration node) {
+			    System.out.println("Method Name: " + node.getName());
+			    System.out.println("Return Type: " + node.getReturnType2());
+
+			    // Parcourir les paramètres de la méthode
+			    node.parameters().forEach(param -> {
+			        System.out.println("Parameter: " + param);
+			    });
+
+			    return super.visit(node);
+			}
+
  
 		});
+        
+//        cu.accept(new ASTVisitorClassName());
         
 
         System.out.println("Goodbye World!");
