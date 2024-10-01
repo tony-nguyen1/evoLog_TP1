@@ -3,6 +3,7 @@ package visitor;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
@@ -12,6 +13,8 @@ import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.Type;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
+
+import test.testt.SmallerAppSingleFile;
 
 public class ASTVisitorSuperClassesName extends ASTVisitor {
 	@Override
@@ -41,7 +44,7 @@ public class ASTVisitorSuperClassesName extends ASTVisitor {
 
             if (superClassSourceCode != null) {
                 // Créer un parser pour analyser la super-classe
-                ASTParser parser = ASTParser.newParser(AST.JLS8); // Ajuster selon la version JLS
+                ASTParser parser = ASTParser.newParser(AST.JLS3); // Ajuster selon la version JLS
                 parser.setSource(superClassSourceCode.toCharArray());
                 parser.setKind(ASTParser.K_COMPILATION_UNIT);
 
@@ -65,7 +68,11 @@ public class ASTVisitorSuperClassesName extends ASTVisitor {
         // En pratique, tu devrais lire le fichier Java correspondant
     	
     	
+    	String s = SmallerAppSingleFile.getSource("src/main/java/dummy/"+className+".java");
     	
+    	if (s != null) {
+    		return s;
+    	}
     	
         return null;  // À implémenter selon ton contexte
     }

@@ -7,7 +7,7 @@ import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
-public class ASTVisitorAttributsName extends ASTVisitor {
+public class ASTVisitorMethodsName extends ASTVisitor {
 	@Override
 	public boolean visit(MethodDeclaration node) {
 	    System.out.println("Method Name: " + node.getName());
