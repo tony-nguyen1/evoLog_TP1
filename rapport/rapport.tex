@@ -59,11 +59,11 @@
         \section*{Démonstration vidéo}
             \addcontentsline{toc}{section}{Démonstration}
             \paragraph{}
-                En ligne sur Youtube, à l'adresse URL \url{https://youtu.be/OuzuGsB9IC4} une démonstration vidéo de notre travail.
+                En ligne sur Youtube, à l'adresse URL \url{https://youtu.be/fDvHlrK8IRg} une démonstration vidéo de notre travail.
         \section*{Installation}
             \addcontentsline{toc}{section}{Installation}
             \paragraph{}
-                Vous trouvez les instructions dans le README.md
+                Vous trouverez les instructions dans le README.md
 
     \newpage
     \begin{multicols}{2}
@@ -84,12 +84,63 @@
         ]
         \section{Extraction de l'AST}
         \paragraph{} Cette partie est prise en charge par la classe ASTParser.
+        % \noindent\includegraphics[width=.23\textwidth]{parser/no_input}
+        \paragraph{} Cependant, un programme étant composé d'une mutltitude de fichier, nous allons procédé en les analysant un par un.
+        
+        Nous indiquons le chemin vers le programme à analyser.
+
+        \noindent\includegraphics[width=.47\textwidth]{parser/source}
+
+        Ensuite, la fonction suivante va fouiller récursivement le repertoire pour trouver tous les fichiers du programme.
+        
+        \noindent\includegraphics[width=.47\textwidth]{parser/readAllFile.png}
+
+        Après ça, il sera possible de transmettre le contenu du fichier au parser.
+
+        \noindent\includegraphics[width=.47\textwidth]{parser/feeding}
         \section{Implementation du visiteur}
         \paragraph{} Afin de parcourir l'AST, nous allons utilisé un visiteur. Pour en implémenter une compatible avec ASTParser, nous spécialisons la classe abstraite ASTVisitor.
 
         Pour pouvoir naviguer précisement dans l'arbre, il nous faut masquer la méthode visit(T node), avec T extends ASTNode. C'est en choisisant soignement le type T que nous pouvons atteindre l'informations recherché.
 
         \subsection{Le nombre de classe}
+        \paragraph{} Dans la classe MasterVisitor, nous écrivons la méthode visit(TypeDeclaration node). Ici la variable node va correspondre à une classe ou une interface. Ainsi, types.add(node) nous permettra de compter le nombre de classe dans un fichier. 
+        
+        \noindent\includegraphics[width=.47\textwidth]{visiteur/visitTypeDeclaration}
+
+        Pour chaque fichier, on compte le nombre de classe, afin de s'assurer de bien prendre en compte les classes imbriqués.
+
+        \noindent\includegraphics[width=.47\textwidth]{visiteur/comptage}
+        \subsection{La méthode avec le plus de paramètre}
+        \paragraph{} Pour chaque fichier à analyser, lors d'une visite d'un noeud MethodDeclaration, nous instancions un tuple sous la forme d'un object CoupleNomData avec comme nom le nom de la méthode et en data, son nombre d'argument. Ils sont mémoriser dans une liste. 
+        \noindent\includegraphics[width=.47\textwidth]{visiteur/visitMethod}
+        
+        À la fin de l'analyse d'un fichier, la liste est trié à l'aide des bibliothèques de bases de Java. Il sera ajouté à listTopParam, une liste pour sauvegarder le meilleur candidat de chaque fichier. 
+        
+        \noindent\includegraphics[width=.47\textwidth]{visiteur/sort1}
+
+        Finalement, cette liste sera également triée de la même façon afin de garder la méthode avec le plus d'argument.
+        \noindent\includegraphics[width=.47\textwidth]{visiteur/sort2}
+
+        
+
+        \section{Exploitation}
+        \paragraph{} Rien de particulier, on se contente de simplement afficher les informations.
+
+        \section{Graphe d'appel}
+        \paragraph{} Nous avons réalisé le graphe d'appel, mais à 1 seul niveau. On ne va pas regarde de façon récursive.
+        \paragraph{} Nous allons regarde chaque déclaration de méthode, pour chacune d'entre elle, nous enregistrons quels méthodes sont invoqués avec le type MethodInvocation.
+
+        \noindent\includegraphics[width=.47\textwidth]{appel/print}
+
+        \noindent\includegraphics[width=.47\textwidth]{appel/visitor1}
+
+        \noindent\includegraphics[width=.47\textwidth]{appel/visitor2}
+
+
+
+
+
             % \paragraph{}
             %     Un fragment est une portion réutilisable de l'interface utilisateur de notre application. Ils sont utiles car ils sont modulaires et réutilisables. 
             % \paragraph{}
@@ -232,6 +283,3 @@
     %     \end{figure*}
     \end{multicols}
 \end{document}
-Quand on quitte l'appli, onStop et onSaveInstanceState sont invoqués.
-Quand on fait retour, onStop est invoqué.
-Quand on revient, onStart et onViewCreated sont invoqués.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  6 OCT 2024 21:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  6 OCT 2024 23:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -428,7 +428,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (rapport//rapport.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (rapport//rapport.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 13.
+)
 \tf@toc=\write3
 \openout3 = `rapport.toc'.
 
@@ -437,35 +442,167 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 62.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 62.
- [2] [3]
-(rapport//rapport.aux) ) 
+) [2]
+<rapport/img//parser/source.png, id=45, 441.65pt x 80.3pt>
+File: rapport/img//parser/source.png Graphic file (type png)
+<use rapport/img//parser/source.png>
+Package pdftex.def Info: rapport/img//parser/source.png  used on input line 92.
+
+(pdftex.def)             Requested size: 212.89546pt x 38.70895pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 92--93
+[] 
+ []
+
+<rapport/img//parser/readAllFile.png, id=47, 607.26875pt x 251.94125pt>
+File: rapport/img//parser/readAllFile.png Graphic file (type png)
+<use rapport/img//parser/readAllFile.png>
+Package pdftex.def Info: rapport/img//parser/readAllFile.png  used on input lin
+e 96.
+(pdftex.def)             Requested size: 212.89546pt x 88.32298pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 96--97
+[] 
+ []
+
+<rapport/img//parser/feeding.png, id=48, 495.8525pt x 227.85126pt>
+File: rapport/img//parser/feeding.png Graphic file (type png)
+<use rapport/img//parser/feeding.png>
+Package pdftex.def Info: rapport/img//parser/feeding.png  used on input line 10
+0.
+(pdftex.def)             Requested size: 212.89546pt x 97.8281pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 100--101
+[] 
+ []
+
+<rapport/img//visiteur/visitTypeDeclaration.png, id=49, 750.805pt x 264.99pt>
+File: rapport/img//visiteur/visitTypeDeclaration.png Graphic file (type png)
+<use rapport/img//visiteur/visitTypeDeclaration.png>
+Package pdftex.def Info: rapport/img//visiteur/visitTypeDeclaration.png  used o
+n input line 109.
+(pdftex.def)             Requested size: 212.89546pt x 75.13881pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 109--110
+[] 
+ []
+
+<rapport/img//visiteur/comptage.png, id=50, 322.20375pt x 41.15375pt>
+File: rapport/img//visiteur/comptage.png Graphic file (type png)
+<use rapport/img//visiteur/comptage.png>
+Package pdftex.def Info: rapport/img//visiteur/comptage.png  used on input line
+ 113.
+(pdftex.def)             Requested size: 212.89546pt x 27.19295pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 113--114
+[] 
+ []
+
+<rapport/img//visiteur/visitMethod.png, id=51, 756.8275pt x 399.4925pt>
+File: rapport/img//visiteur/visitMethod.png Graphic file (type png)
+<use rapport/img//visiteur/visitMethod.png>
+Package pdftex.def Info: rapport/img//visiteur/visitMethod.png  used on input l
+ine 116.
+(pdftex.def)             Requested size: 212.89546pt x 112.37527pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 115--117
+[] 
+ []
+
+<rapport/img//visiteur/sort1.png, id=52, 462.72874pt x 80.3pt>
+File: rapport/img//visiteur/sort1.png Graphic file (type png)
+<use rapport/img//visiteur/sort1.png>
+Package pdftex.def Info: rapport/img//visiteur/sort1.png  used on input line 12
+0.
+(pdftex.def)             Requested size: 212.89546pt x 36.94456pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 120--121
+[] 
+ []
+
+<rapport/img//visiteur/sort2.png, id=53, 275.0275pt x 31.11626pt>
+File: rapport/img//visiteur/sort2.png Graphic file (type png)
+<use rapport/img//visiteur/sort2.png>
+Package pdftex.def Info: rapport/img//visiteur/sort2.png  used on input line 12
+3.
+(pdftex.def)             Requested size: 212.89546pt x 24.0873pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--124
+[]\T1/cmr/m/n/10 Finalement, cette liste sera éga-le-ment
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--124
+\T1/cmr/m/n/10 triée de la même fa-çon afin de gar-
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 122--124
+[] 
+ []
+
+[3 <./rapport/img//parser/source.png> <./rapport/img//parser/readAllFile.png> <
+./rapport/img//parser/feeding.png> <./rapport/img//visiteur/visitTypeDeclaratio
+n.png> <./rapport/img//visiteur/comptage.png> <./rapport/img//visiteur/visitMet
+hod.png> <./rapport/img//visiteur/sort1.png> <./rapport/img//visiteur/sort2.png
+>]
+<rapport/img//appel/print.png, id=74, 643.40375pt x 469.755pt>
+File: rapport/img//appel/print.png Graphic file (type png)
+<use rapport/img//appel/print.png>
+Package pdftex.def Info: rapport/img//appel/print.png  used on input line 134.
+(pdftex.def)             Requested size: 212.89546pt x 155.43536pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 134--135
+[] 
+ []
+
+<rapport/img//appel/visitor1.png, id=75, 604.2575pt x 246.9225pt>
+File: rapport/img//appel/visitor1.png Graphic file (type png)
+<use rapport/img//appel/visitor1.png>
+Package pdftex.def Info: rapport/img//appel/visitor1.png  used on input line 13
+6.
+(pdftex.def)             Requested size: 212.89546pt x 86.99686pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 136--137
+[] 
+ []
+
+<rapport/img//appel/visitor2.png, id=76, 604.2575pt x 246.9225pt>
+File: rapport/img//appel/visitor2.png Graphic file (type png)
+<use rapport/img//appel/visitor2.png>
+Package pdftex.def Info: rapport/img//appel/visitor2.png  used on input line 13
+8.
+(pdftex.def)             Requested size: 212.89546pt x 86.99686pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 138--139
+[] 
+ []
+
+[4 <./rapport/img//appel/print.png> <./rapport/img//appel/visitor1.png> <./rapp
+ort/img//appel/visitor2.png>] (rapport//rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 10777 strings out of 479551
- 172239 string characters out of 5876172
- 478518 words of memory out of 5000000
- 28624 multiletter control sequences out of 15000+600000
- 479833 words of font info for 48 fonts, out of 8000000 for 9000
+ 10932 strings out of 479551
+ 176527 string characters out of 5876172
+ 485518 words of memory out of 5000000
+ 28746 multiletter control sequences out of 15000+600000
+ 480609 words of font info for 49 fonts, out of 8000000 for 9000
  395 hyphenation exceptions out of 8191
- 60i,6n,63p,519b,442s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ectt1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ecbx1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ecbx1440.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ecrm1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ecti0900.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ecbx0900.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ecti1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ecrm1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ecrm1728.600pk>
-Output written on rapport//rapport.pdf (3 pages, 67568 bytes).
+ 60i,6n,63p,547b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0900.600pk> </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk> </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/tony/.texlive2021
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk>
+Output written on rapport//rapport.pdf (4 pages, 359823 bytes).
 PDF statistics:
- 306 PDF objects out of 1000 (max. 8388607)
- 87 compressed objects within 1 object stream
- 15 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 412 PDF objects out of 1000 (max. 8388607)
+ 123 compressed objects within 2 object streams
+ 26 named destinations out of 1000 (max. 500000)
+ 128 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -82,91 +82,92 @@ public class MyParser {
 		
 	}
 	
-//	public static final String projectPath = "C:\\Users\\zakarea.alshara\\osgi_workspace\\projectToParse";
+	
 	public static final String projectPath = "/home/tony/M2/evoLog/evoLog_TP1";
-//	public static final String projectSourcePath = projectPath + "\\src";
 	public static final String projectSourcePath = projectPath + "/src";
-//	public static final String jrePath = "C:\\Program Files\\Java\\jre1.8.0_51\\lib\\rt.jar";
-//	public static final String jrePath = "/usr/bin/java";
 	public static final String jrePath = "/usr/lib/jvm/java-8-openjdk-amd64/jre";
 	public static final int X = 2;
+
 	
-	private LineCountVisitor liveCountVisitor;
-
-	public static void main(String[] args) throws IOException {
-
-		// read java files
-		String tmp = "src/main/java/dummy";
-//		final File folder = new File(projectSourcePath);
-		final File folder = new File(tmp);
-		ArrayList<File> javaFiles = listJavaFilesForFolder(folder);
-		int nbFile = javaFiles.size();
-		int selectionSize = (int) Math.ceil((double)nbFile/10);
-
-		//
+	
+	
+	
+	private ArrayList<File> javaFiles;
+	private int nbFile;
+	private int selectionSize;
+	
+	public MyParser(String pathToProject) {
+		final File folder = new File(pathToProject);
+		javaFiles = listJavaFilesForFolder(folder);
+		nbFile = javaFiles.size();
+		selectionSize = (int) Math.ceil((double)nbFile/10);
+	}
+	
+	public void compute() throws IOException {
+		
 		int nbClass = 0;
 		int nbLine = 0;
 		int nbMethodTotal = 0;
-		Set<String> packageNameSet = new HashSet<>();
 		int nbLineMethod = 0;
 		int nbAttrTotal = 0;
+		
+		Set<String> packageNameSet = new HashSet<>();
 		ArrayList<CoupleNomData> listTopNbMethod = new ArrayList<>();
 		ArrayList<CoupleNomData> listTopNbAttr = new ArrayList<>();
 		HashSet<CoupleNomData> setTopNbMethod = new HashSet<>();
 		HashSet<CoupleNomData> setTopNbAttr= new HashSet<>();
 		ArrayList<CoupleNomData> listTopParam= new ArrayList<>();
+		
 		for (File fileEntry : javaFiles) {
+			
 			int nbMethod, nbAttr;
 			String nom = fileEntry.getName();
 			int end = nom.lastIndexOf(".java");
 			nom = nom.substring(0, end);
-//			System.out.println(nom);
-			String content = FileUtils.readFileToString(fileEntry);
-			// System.out.println(content);
 
+			String content = FileUtils.readFileToString(fileEntry);
 			CompilationUnit parse = parse(content.toCharArray());
 			
-			// compute here for each file
-			ClassesNumberVisitor visitor = new ClassesNumberVisitor();
+			// compute and extract here
+			MasterVisitor visitor = new MasterVisitor(parse);
 			parse.accept(visitor);
 
-			int sum = 0;
-			for (TypeDeclaration method : visitor.getTypes()) {
-				sum++;
-			}
 			
-			nbClass += sum;
-			nbLine += getLinesCount(parse);
-			nbMethod = getMethodCount(parse);
+			nbClass += visitor.getTypes().size();
+			
+			nbLine += visitor.getTotalLines();
+			
+			nbMethod = visitor.getNbMethod();
 			nbMethodTotal += nbMethod;
-			packageNameSet.add(getPackageCount(parse));
-			nbLineMethod += getLinesMethodCount(parse);
-			nbAttr = getAttrCount(parse);
+			
+			packageNameSet.add(visitor.getPackageName());
+			
+			nbLineMethod += visitor.getNbMethodLine();
+			
+			nbAttr = visitor.getNbAttr();
 			nbAttrTotal += nbAttr;
 			
-			listTopParam.add(getMaxMethodNbParam(parse));
+			ArrayList<MyParser.CoupleNomData> l = visitor.getList();
+			Collections.sort(l);
+			
+			listTopParam.add(l.get(0));
 			listTopNbMethod.add(new CoupleNomData(nom, nbMethod));
 			listTopNbAttr.add(new CoupleNomData(nom, nbAttr));
-			
+		
 			printMethodInvocationInfo(parse);
 			
 		}
 		float nbMoyenMeth = nbMethodTotal/nbClass;
 		float avgSizeMetho = nbLineMethod/nbMethodTotal;
 		Collections.sort(listTopNbMethod);
-		for (int i=0; i<selectionSize; i++) {
-//			System.out.println(listTopNbMethod.get(i).nom + listTopNbMethod.get(i).nb);
-		}
 		Collections.sort(listTopNbAttr);
 		for (int i=0; i<selectionSize; i++) {
 			setTopNbAttr.add(listTopNbAttr.get(i));
 			setTopNbMethod.add(listTopNbMethod.get(i));
 		}
 		Collections.sort(listTopParam);
-//		for(CoupleNomData c : listTopParam) {
-//			System.out.println(c.nom+" "+c.nb);
-//		}
 
+		// exploitation des infos
 		System.out.println("Nombre de classes dans l'application: \n"+nbClass);
 		System.out.println("Nombre de lignes dans l'application: \n"+nbLine);
 		System.out.println("Nombre de méthodes dans l'application: \n"+nbMethodTotal);
@@ -174,23 +175,36 @@ public class MyParser {
 		System.out.println("Nombre moyen de méthode par class dans l'application: \n"+nbMoyenMeth);
 		System.out.println("Taille moyennes des méthodes dans l'application: \n"+avgSizeMetho);
 		System.out.println("Nombre d'attribut dans l'application: \n"+nbAttrTotal);
+		
 		System.out.println("Top 10% ("+selectionSize+"/"+nbFile+") des classes qui possèdent le plus de méthodes:");
 		for (int i=0; i<selectionSize; i++) {
 			System.out.print(listTopNbMethod.get(i).nom+" ");
 		}System.out.println();
+		
 		System.out.println("Top 10% ("+selectionSize+"/"+nbFile+") des classes qui possèdent le plus d'attributs:");
 		for (int i=0; i<selectionSize; i++) {
 			System.out.print(listTopNbAttr.get(i).nom+" ");
 		}System.out.println();
+		
 		System.out.println("L'intersection des 2:");
 		setTopNbAttr.retainAll(setTopNbMethod);
 		for(CoupleNomData c : setTopNbAttr) {
 			System.out.println(c.nom);
 		}
+		
 		System.out.println("Nombre maximal de paramètres pour une méthode de l'application:");
 		if (!listTopParam.isEmpty()) {
 			System.out.println(listTopParam.get(0).nom);
 		}
+	}
+		
+		
+	
+	
+
+	public static void main(String[] args) throws IOException {
+		MyParser myParser = new MyParser("src/main/java/dummy");
+		myParser.compute();
 	}
 	
 	public static void printMethodInvocationInfo(CompilationUnit parse) {
@@ -205,8 +219,6 @@ public class MyParser {
 
 			HashSet<String> setMethod = new HashSet();
 			for (MethodInvocation methodInvocation : visitor2.getMethods()) {
-//				System.out.println("method " + method.getName() + " invoc method "
-//						+ methodInvocation.getName());
 				
 				setMethod.add(methodInvocation.getName().getIdentifier());
 			}
@@ -220,66 +232,6 @@ public class MyParser {
 			}
 
 		}
-	}
-	
-	
-	
-	// 
-	public static int getClassesNumber(CompilationUnit parse) {
-		ClassesNumberVisitor visitor = new ClassesNumberVisitor();
-		parse.accept(visitor);
-
-		int sum = 0;
-		for (TypeDeclaration method : visitor.getTypes()) {
-			sum++;
-		}
-		return sum;
-	}
-	
-	// 
-	public static int getLinesCount(CompilationUnit parse) {
-		LineCountVisitor visitor = new LineCountVisitor(parse);
-		parse.accept(visitor);
-
-		return visitor.getTotalLines();
-	}
-	
-	public static int getLinesMethodCount(CompilationUnit parse) {
-		LineCountVisitor visitor = new LineCountVisitor(parse);
-		parse.accept(visitor);
-
-		return visitor.getNbMethodLine();
-	}
-	
-	public static int getMethodCount(CompilationUnit parse) {
-		LineCountVisitor visitor = new LineCountVisitor(parse);
-		parse.accept(visitor);
-
-		return visitor.getNbMethod();
-	}
-	
-	public static String getPackageCount(CompilationUnit parse) {
-		PackageCountVisitor visitor = new PackageCountVisitor();
-		parse.accept(visitor);
-
-		return visitor.getPackageName();
-	}
-	
-	public static int getAttrCount(CompilationUnit parse) {
-		LineCountVisitor visitor = new LineCountVisitor(parse);
-		parse.accept(visitor);
-
-		return visitor.getNbAttr();
-	}
-	
-	public static CoupleNomData getMaxMethodNbParam(CompilationUnit parse) {
-		LineCountVisitor visitor = new LineCountVisitor(parse);
-		parse.accept(visitor);
-		
-		ArrayList<MyParser.CoupleNomData> l = visitor.getList();
-		Collections.sort(l);
-
-		return l.get(0);
 	}
 	
 	
