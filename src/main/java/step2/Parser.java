@@ -3,6 +3,7 @@ package step2;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -25,7 +26,8 @@ public class Parser {
 //	public static final String projectPath = "C:\\Users\\zakarea.alshara\\osgi_workspace\\projectToParse";
 	public static final String projectPath = "/home/tony/M2/evoLog/evoLog_TP1";
 //	public static final String projectSourcePath = projectPath + "\\src";
-	public static final String projectSourcePath = projectPath + "/src";
+//	public static final String projectSourcePath = projectPath + "/src";
+	public static final String projectSourcePath = projectPath + "/src/main/java/dummy";
 //	public static final String jrePath = "C:\\Program Files\\Java\\jre1.8.0_51\\lib\\rt.jar";
 //	public static final String jrePath = "/usr/bin/java";
 	public static final String jrePath = "/usr/lib/jvm/java-8-openjdk-amd64/jre";
@@ -43,10 +45,10 @@ public class Parser {
 			CompilationUnit parse = parse(content.toCharArray());
 
 			// print methods info
-			printMethodInfo(parse);
-
-			// print variables info
-			printVariableInfo(parse);
+//			printMethodInfo(parse);
+//
+//			// print variables info
+//			printVariableInfo(parse);
 			
 			//print method invocations
 			printMethodInvocationInfo(parse);
@@ -132,11 +134,19 @@ public class Parser {
 			for (MethodDeclaration method : visitor1.getMethods()) {
 
 				MethodInvocationVisitor visitor2 = new MethodInvocationVisitor();
+				
 				method.accept(visitor2);
 
+				HashSet<String> setMethod = new HashSet();
 				for (MethodInvocation methodInvocation : visitor2.getMethods()) {
-					System.out.println("method " + method.getName() + " invoc method "
-							+ methodInvocation.getName());
+//					System.out.println("method " + method.getName() + " invoc method "
+//							+ methodInvocation.getName());
+					
+					setMethod.add(methodInvocation.getName().getIdentifier());
+				}
+				System.out.println(method.getName() + " appel : ");		
+				for (String s : setMethod) {
+					System.out.println("  "+s);					
 				}
 
 			}

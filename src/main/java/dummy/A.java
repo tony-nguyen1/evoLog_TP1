@@ -10,4 +10,8 @@ public class A extends B {
 	public A() {
 		this.j = 1;
 	}
+	
+	private void foo(int i, int j, float f) {}
+	private void oof(double d, String s) {}
+	private void bar(Object o) {}
 }
