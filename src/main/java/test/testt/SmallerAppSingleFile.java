@@ -51,19 +51,19 @@ public class SmallerAppSingleFile {
    
         @SuppressWarnings("deprecation")
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
-//        parser.setSource(getSource("src/main/java/dummy/A.java").toCharArray());
-        String source = "public class A extends B {\n"
-        		+ "	int i = 9;\n"
-        		+ "	public int j;\n"
-        		+ "	private ArrayList<Integer> al = new ArrayList<Integer>();\n"
-        		+ "	\n"
-        		+ "	@SuppressWarnings(\"unused\")\n"
-        		+ "	private boolean isBool(boolean b) {\n"
-        		+ "		return true;\n"
-        		+ "	}\n"
-        		+ "}";
+        parser.setSource(getSource("src/main/java/dummy/A.java").toCharArray());
+//        String source = "public class A extends B {\n"
+//        		+ "	int i = 9;\n"
+//        		+ "	public int j;\n"
+//        		+ "	private ArrayList<Integer> al = new ArrayList<Integer>();\n"
+//        		+ "	\n"
+//        		+ "	@SuppressWarnings(\"unused\")\n"
+//        		+ "	private boolean isBool(boolean b) {\n"
+//        		+ "		return true;\n"
+//        		+ "	}\n"
+//        		+ "}";
 //        System.out.println(source);
-        parser.setSource(source.toCharArray());
+//        parser.setSource(source.toCharArray());
         final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
         
         cu.accept(new ASTVisitorMethodsName());

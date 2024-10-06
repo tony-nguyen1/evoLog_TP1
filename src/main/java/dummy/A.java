@@ -7,8 +7,7 @@ public class A extends B {
 	public int j;
 	private ArrayList<Integer> al = new ArrayList<Integer>();
 	
-	@SuppressWarnings("unused")
-	private boolean isBool(boolean b) {
-		return true;
+	public A() {
+		this.j = 1;
 	}
 }
